@@ -8,7 +8,9 @@ using System.Threading;
 
 namespace Microsoft.AspNet.SignalR
 {
-    internal static class OwinEnvironmentExtensions
+	using SaveTrees.Logging;
+
+	internal static class OwinEnvironmentExtensions
     {
         internal static CancellationToken GetShutdownToken(this IDictionary<string, object> env)
         {
@@ -40,7 +42,7 @@ namespace Microsoft.AspNet.SignalR
             object value;
             if (environment.TryGetValue(OwinConstants.HostTraceOutputKey, out value))
             {
-                return value as TextWriter;
+				return value as TextWriter;
             }
 
             return null;
@@ -66,8 +68,9 @@ namespace Microsoft.AspNet.SignalR
             if (environment.TryGetValue(OwinConstants.HostAppModeKey, out value))
             {
                 var stringVal = value as string;
-                return !String.IsNullOrWhiteSpace(stringVal) &&
-                       OwinConstants.AppModeDevelopment.Equals(stringVal, StringComparison.OrdinalIgnoreCase);
+	            var isDebugEnabled = !String.IsNullOrWhiteSpace(stringVal) &&
+									 OwinConstants.AppModeDevelopment.Equals(stringVal, StringComparison.OrdinalIgnoreCase);
+	            return isDebugEnabled;
             }
 
             return false;

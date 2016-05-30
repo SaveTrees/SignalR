@@ -13,7 +13,7 @@ namespace Microsoft.AspNet.SignalR.Infrastructure
     /// <see cref="Microsoft.AspNet.SignalR.Messaging.IMessageBus"/> and
     /// triggers any corresponding ACKs on the <see cref="IAckHandler"/>.
     /// </summary>
-    internal class AckSubscriber : ISubscriber, IDisposable
+    public class AckSubscriber : ISubscriber, IDisposable
     {
         private readonly IMessageBus _messageBus;
         private readonly IAckHandler _ackHandler;

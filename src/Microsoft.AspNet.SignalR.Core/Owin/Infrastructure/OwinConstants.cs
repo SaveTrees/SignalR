@@ -2,7 +2,7 @@
 
 namespace Microsoft.AspNet.SignalR
 {
-    internal static class OwinConstants
+	public static class OwinConstants
     {
         public const string Version = "owin.Version";
 

@@ -9,7 +9,6 @@ using System.Threading;
 using Microsoft.AspNet.SignalR.Configuration;
 using Microsoft.AspNet.SignalR.Hubs;
 using Microsoft.AspNet.SignalR.Infrastructure;
-using Microsoft.AspNet.SignalR.Json;
 using Microsoft.AspNet.SignalR.Messaging;
 using Microsoft.AspNet.SignalR.Tracing;
 using Microsoft.AspNet.SignalR.Transports;
@@ -121,7 +120,7 @@ namespace Microsoft.AspNet.SignalR
                 }
                 if (activators.Count > 1)
                 {
-                    throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, Resources.Error_MultipleActivatorsAreaRegisteredCallGetServices, serviceType.FullName));
+                    throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, Resources.Error_MultipleActivatorsAreaRegisteredCallGetServices, serviceType.AssemblyQualifiedName));
                 }
                 return Track(activators[0]);
             }

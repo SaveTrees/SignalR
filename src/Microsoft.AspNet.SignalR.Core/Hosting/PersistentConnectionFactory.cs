@@ -43,7 +43,7 @@ namespace Microsoft.AspNet.SignalR.Hosting
 
             if (connection == null)
             {
-                throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, Resources.Error_IsNotA, connectionType.FullName, typeof(PersistentConnection).FullName));
+                throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, Resources.Error_IsNotA, connectionType.FullName, typeof(PersistentConnection).AssemblyQualifiedName));
             }
 
             return connection;

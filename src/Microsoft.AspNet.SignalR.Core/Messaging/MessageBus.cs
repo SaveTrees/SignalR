@@ -48,7 +48,7 @@ namespace Microsoft.AspNet.SignalR.Messaging
         internal Action<string, Topic> AfterTopicMarkedSuccessfully;
         internal Action<string, Topic, int> AfterTopicMarked;
 
-        private const int DefaultMaxTopicsWithNoSubscriptions = 1000;
+	    public const int DefaultMaxTopicsWithNoSubscriptions = 1000;
 
         private readonly Func<string, Topic> _createTopic;
         private readonly Action<ISubscriber, string> _addEvent;

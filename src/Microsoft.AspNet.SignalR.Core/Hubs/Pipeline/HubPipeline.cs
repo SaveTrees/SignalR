@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNet.SignalR.Hubs
 {
-    internal class HubPipeline : IHubPipeline, IHubPipelineInvoker
+	public class HubPipeline : IHubPipeline, IHubPipelineInvoker
     {
         private readonly Stack<IHubPipelineModule> _modules;
         private readonly Lazy<ComposedPipeline> _pipeline;

@@ -4,21 +4,27 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNet.SignalR.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Microsoft.AspNet.SignalR.Hubs
 {
-    public class DefaultHubManager : IHubManager
+	public class DefaultHubManager : IHubManager
     {
         private readonly IEnumerable<IMethodDescriptorProvider> _methodProviders;
         private readonly IHubActivator _activator;
         private readonly IEnumerable<IHubDescriptorProvider> _hubProviders;
 
-        public DefaultHubManager(IDependencyResolver resolver)
+		public DefaultHubManager(IEnumerable<IHubDescriptorProvider> hubDescriptorProviders, IEnumerable<IMethodDescriptorProvider> methodDescriptorProviders, IHubActivator hubActivator)
+		{
+			_hubProviders = hubDescriptorProviders;
+			_methodProviders = methodDescriptorProviders;
+			_activator = hubActivator;
+		}
+
+		public DefaultHubManager(IDependencyResolver resolver) : this(
+			resolver.ResolveAll<IHubDescriptorProvider>(), 
+			resolver.ResolveAll<IMethodDescriptorProvider>(), 
+			resolver.Resolve<IHubActivator>())
         {
-            _hubProviders = resolver.ResolveAll<IHubDescriptorProvider>();
-            _methodProviders = resolver.ResolveAll<IMethodDescriptorProvider>();
-            _activator = resolver.Resolve<IHubActivator>();
         }
 
         public HubDescriptor GetHub(string hubName)

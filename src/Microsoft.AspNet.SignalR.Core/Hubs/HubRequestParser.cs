@@ -10,7 +10,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Microsoft.AspNet.SignalR.Hubs
 {
-    internal class HubRequestParser : IHubRequestParser
+	public class HubRequestParser : IHubRequestParser
     {
         private static readonly IJsonValue[] _emptyArgs = new IJsonValue[0];
 

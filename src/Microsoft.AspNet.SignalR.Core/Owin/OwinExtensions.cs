@@ -19,7 +19,7 @@ using Microsoft.Owin.Extensions;
 
 namespace Owin
 {
-    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Owin", Justification = "The owin namespace is for consistentcy.")]
+	[SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Owin", Justification = "The owin namespace is for consistentcy.")]
     public static class OwinExtensions
     {
         /// <summary>
@@ -194,9 +194,9 @@ namespace Owin
                 IDataProtectionProvider provider = builder.GetDataProtectionProvider();
                 IProtectedData protectedData;
 
-                // If we're using DPAPI then fallback to the default protected data if running
-                // on mono since it doesn't support any of this
-                if (provider == null && MonoUtility.IsRunningMono)
+				// If we're using DPAPI then fallback to the default protected data if running
+				// on mono since it doesn't support any of this
+				if (provider == null && MonoUtility.IsRunningMono)
                 {
                     protectedData = new DefaultProtectedData();
                 }
@@ -209,17 +209,19 @@ namespace Owin
 
                     protectedData = new DataProtectionProviderProtectedData(provider);
                 }
+				resolver.Register(typeof(IProtectedData), () => protectedData);
 
-                resolver.Register(typeof(IProtectedData), () => protectedData);
-
-                // If the host provides trace output then add a default trace listener
-                TextWriter traceOutput = env.GetTraceOutput();
-                if (traceOutput != null)
+				// If the host provides trace output then add a default trace listener
+				TextWriter traceOutput = env.GetTraceOutput();
+				//Log.CurrentLogger.Debug()("Traceoutput is null: " + (traceOutput == null));
+				if (traceOutput != null)
                 {
-                    var hostTraceListener = new TextWriterTraceListener(traceOutput);
+//					Log.CurrentLogger.Debug()("Registering trace manager");
+					var hostTraceListener = new TextWriterTraceListener(traceOutput);
                     var traceManager = new TraceManager(hostTraceListener);
                     resolver.Register(typeof(ITraceManager), () => traceManager);
-                }
+//					Log.CurrentLogger.Debug()("Registered trace manager");
+				}
 
                 // Try to get the list of reference assemblies from the host
                 IEnumerable<Assembly> referenceAssemblies = env.GetReferenceAssemblies();
@@ -233,14 +235,14 @@ namespace Owin
                 resolver.InitializeHost(instanceName, token);
             }
 
-            builder.Use(typeof(T), args);
+	        builder.Use(typeof(T), args);
 
-            // BUG 2306: We need to make that SignalR runs before any handlers are
-            // mapped in the IIS pipeline so that we avoid side effects like
-            // session being enabled. The session behavior can be
-            // manually overridden if user calls SetSessionStateBehavior but that shouldn't
-            // be a problem most of the time.
-            builder.UseStageMarker(PipelineStage.PostAuthorize);
+			// BUG 2306: We need to make that SignalR runs before any handlers are
+			// mapped in the IIS pipeline so that we avoid side effects like
+			// session being enabled. The session behavior can be
+			// manually overridden if user calls SetSessionStateBehavior but that shouldn't
+			// be a problem most of the time.
+			builder.UseStageMarker(PipelineStage.PostAuthorize);
 
             return builder;
         }

@@ -40,20 +40,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Owin">
-      <HintPath>..\..\..\..\..\savetrees\code\references\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\..\..\..\savetrees\references\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.Security">
-      <HintPath>..\..\..\..\..\savetrees\code\references\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\..\..\..\savetrees\references\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\savetrees\code\references\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\..\savetrees\references\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Owin">
-      <HintPath>..\..\..\..\..\savetrees\code\references\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\savetrees\references\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -313,6 +312,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\savetrees\framework\code\sources\c#\SaveTrees\SaveTrees.csproj">
+      <Project>{25f20c9d-2728-48ef-9322-63dab74aeeac}</Project>
+      <Name>SaveTrees</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="..\Common\Microsoft.AspNet.SignalR.targets" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

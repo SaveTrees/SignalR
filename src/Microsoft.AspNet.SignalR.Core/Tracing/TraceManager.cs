@@ -18,6 +18,9 @@ namespace Microsoft.AspNet.SignalR.Tracing
 
         public TraceManager(TextWriterTraceListener hostTraceListener)
         {
+            //SaveTrees.Logging.Log.CurrentLogger.Debug()("hostTraceListener is null: " + (hostTraceListener == null));
+            //SaveTrees.Logging.Log.CurrentLogger.Debug()("hostTraceListener type: " + hostTraceListener?.GetType());
+
             Switch = new SourceSwitch("SignalRSwitch");
             _hostTraceListener = hostTraceListener;
         }
