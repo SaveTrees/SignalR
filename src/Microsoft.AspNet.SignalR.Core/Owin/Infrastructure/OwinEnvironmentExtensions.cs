@@ -42,6 +42,7 @@ namespace Microsoft.AspNet.SignalR
             object value;
             if (environment.TryGetValue(OwinConstants.HostTraceOutputKey, out value))
             {
+                Log.CurrentLogger.Debug()("HaveTraceOutput, {type}", value.GetType());
 				return value as TextWriter;
             }
 

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR.Hubs;
 using Microsoft.AspNet.SignalR.Json;
 using Microsoft.Owin;
+using SaveTrees.Logging;
 
 namespace Microsoft.AspNet.SignalR.Owin.Middleware
 {
@@ -20,6 +21,8 @@ namespace Microsoft.AspNet.SignalR.Owin.Middleware
 
         public override Task Invoke(IOwinContext context)
         {
+            //Log.CurrentLogger.Debug()("Invoking SignalR.");
+
             if (context == null)
             {
                 throw new ArgumentNullException("context");
@@ -30,11 +33,17 @@ namespace Microsoft.AspNet.SignalR.Owin.Middleware
                 return TaskAsyncHelper.Empty;
             }
 
+            //Log.CurrentLogger.Debug()("dispatcher c'tor start.");
             var dispatcher = new HubDispatcher(_configuration);
+            //Log.CurrentLogger.Debug()("dispatcher c'tor end.");
 
             dispatcher.Initialize(_configuration.Resolver);
+            //Log.CurrentLogger.Debug()("Initialised dispatcher.");
 
-            return dispatcher.ProcessRequest(context.Environment);
+            var processRequest = dispatcher.ProcessRequest(context.Environment);
+            //Log.CurrentLogger.Debug()("Processed request.");
+
+            return processRequest;
         }
     }
 }

@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
+using SaveTrees.Logging;
 
 namespace Microsoft.AspNet.SignalR.Tracing
 {

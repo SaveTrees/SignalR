@@ -13,6 +13,7 @@ using Microsoft.AspNet.SignalR.Json;
 using Microsoft.AspNet.SignalR.Owin;
 using Microsoft.AspNet.SignalR.Tracing;
 using Newtonsoft.Json;
+using SaveTrees.Logging;
 
 namespace Microsoft.AspNet.SignalR.Transports
 {
@@ -145,6 +146,7 @@ namespace Microsoft.AspNet.SignalR.Transports
             {
                 // Bad Request
                 _context.Response.StatusCode = 400;
+                Log.CurrentLogger.Debug()("400 ws accept missing");
                 return _context.Response.End(Resources.Error_NotWebSocketRequest);
             }
 

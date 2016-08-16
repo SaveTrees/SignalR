@@ -19,6 +19,9 @@ namespace Microsoft.AspNet.SignalR.Owin
         public ServerResponse(IDictionary<string, object> environment)
         {
             _response = new OwinResponse(environment);
+            // Note: To support Nginx. http://stackoverflow.com/questions/27898622/server-sent-events-stopped-work-after-enabling-ssl-on-proxy
+            _response.Headers["X-Accel-Buffering"] = "no";
+
             _callCancelled = _response.Get<CancellationToken>(OwinConstants.CallCancelled);
             _responseBody = _response.Body;
         }

@@ -499,6 +499,10 @@ namespace Microsoft.AspNet.SignalR
             string connectionId = Guid.NewGuid().ToString("d");
             string connectionToken = connectionId + ':' + GetUserIdentity(context);
 
+            var supports = context.Environment.SupportsWebSockets();
+            //Log.CurrentLogger.Debug()("Supports: {supports}", supports);
+            Trace.TraceInformation("Supports: {0}", supports);
+
             var payload = new
             {
                 Url = context.Request.LocalPath.Replace("/negotiate", ""),
